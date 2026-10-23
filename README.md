@@ -4,7 +4,7 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 
 ## Current version
 
-**v0.7.00**
+**v0.7.02**
 
 ## Features
 
@@ -21,6 +21,24 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 - Mobile-first responsive layout
 
 ## Version history
+
+### v0.7.02
+
+- Fixed navigation to the Report an Issue page from the Home action and the central `+` button.
+- Prevented recursive Open Issues page rendering.
+- Redesigned the Home dashboard using three compact status cards.
+- Moved the local-only storage message outside the dashboard statistics.
+- Improved mobile spacing, typography and card proportions.
+- Reduced the bottom `+` button from 70px to 60px.
+- Removed the text label under the central `+` button.
+
+### v0.7.01
+
+- Fixed a stale `#photo` selector in the form reset flow after Photo was split into **Take Photo** and **Choose Photo**.
+- Reset now clears both `cameraPhoto` and `galleryPhoto` safely.
+- Reset and Remove Photo now also clear the stored and displayed photo filename.
+- Prevented errors when selecting **Report Another Issue** or loading an Open Issue for editing.
+- Re-audited HTML IDs, JavaScript selectors, JavaScript syntax, Service Worker syntax, version metadata and ZIP integrity.
 
 ### v0.7.00
 

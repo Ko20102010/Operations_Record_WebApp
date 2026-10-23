@@ -1,6 +1,6 @@
 {
-  "version": "0.7.00",
-  "minimumVersion": "0.7.00",
+  "version": "0.7.02",
+  "minimumVersion": "0.7.02",
   "forceUpdate": true,
   "messageEn": "Please update before submitting or editing reports.",
   "messageZh": "請先更新至最新版本，然後再提交或編輯報告。"
