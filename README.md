@@ -4,7 +4,7 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 
 ## Current version
 
-**v0.6.00**
+**v0.7.00**
 
 ## Features
 
@@ -21,6 +21,25 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 - Mobile-first responsive layout
 
 ## Version history
+
+### v0.7.00
+
+- Applied a full field-name and interface-copy review across the WebApp.
+- Renamed the Home page subtitle to **Dashboard / 主頁概覽**.
+- Renamed dashboard cards to **Suspended / 暫停運作**, **Today's Reports / 今日報告**, and **This Device Only / 只限此裝置**.
+- Added the clear local-storage notice: reports are not yet shared across devices.
+- Standardized the primary action as **Report an Issue / 報告故障** and the bottom action as **Report / 報告**.
+- Renamed **Recent Issues** to **Recent Reports / 最近報告**.
+- Renamed **Emergency Stop Problem** to **Emergency Stop Issue / 急停掣故障**.
+- Renamed **Other / 其他機械問題** to **Other / 其他機械故障**.
+- Clarified **Unable to Identify** as **未能確認系統** and simplified the IT guidance text.
+- Renamed **Conveyor Mud Cleaning** to **Conveyor Cleaning / 輸送帶清泥**.
+- Renamed **Stock Empty / 清缸** to **Bin Empty / 料缸清缸** as instructed for the no-material condition.
+- Renamed **Normal Operation / 正常運作** to **No Operational Impact / 不影響運作**.
+- Renamed Preview **Issue / 問題** to **Related Issue / 相關問題**.
+- Updated the observation placeholder to ask Frontline users what they observed, rather than asking for a cause.
+- Corrected the local-only success message so it does not imply other users can already view the report.
+- Shortened bottom navigation to **Home / 主頁**, **Report / 報告**, and **Open / 未完成**.
 
 ### v0.6.00
 
