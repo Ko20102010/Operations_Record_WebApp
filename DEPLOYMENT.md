@@ -1,4 +1,4 @@
-# Deployment Guide v0.0.00
+# Deployment Guide v0.1.00
 
 ## GitHub Pages
 Upload `index.html`, `manifest.webmanifest`, `.nojekyll`, `README.md` and this file to the repository root. Enable GitHub Pages from the `main` branch and `/(root)` folder.

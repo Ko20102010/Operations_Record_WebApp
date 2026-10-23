@@ -1,4 +1,4 @@
-# Operations Support Frontline WebApp v0.0.00
+# Operations Support Frontline WebApp v0.1.00
 
 Mobile-first static MVP for reporting STW1/STW2 issues.
 
@@ -7,12 +7,14 @@ Mobile-first static MVP for reporting STW1/STW2 issues.
 - Material: 05mm / 10mm / 20mm
 - Issue types: Mechanical, IT System, Replenishment
 - Bilingual UI and Chinese-default WhatsApp copy
+- Required Incident Time field, defaulting to current device/Hong Kong time
+- Separate incident and submitted timestamps
 - Photo preview
 - Impact status colors
 - Browser-local Open Issues list
 
 ## Important limitation
-This v0.0.00 is a static MVP. Reports use browser localStorage, so records are not shared between phones or computers. Photo files are previewed only and are not permanently uploaded. Connect a shared backend (Supabase, PocketBase, Firebase, etc.) in a later version for shared records.
+This v0.1.00 is a static MVP. Reports use browser localStorage, so records are not shared between phones or computers. Photo files are previewed only and are not permanently uploaded. Connect a shared backend (Supabase, PocketBase, Firebase, etc.) in a later version for shared records.
 
 ## GitHub Pages
 1. Create a new GitHub repository.
