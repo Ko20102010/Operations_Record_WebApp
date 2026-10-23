@@ -4,7 +4,7 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 
 ## Current version
 
-**v0.2.00**
+**v0.4.00**
 
 ## Features
 
@@ -21,6 +21,19 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 - Mobile-first responsive layout
 
 ## Version history
+
+### v0.4.00
+
+- Split Photo into two clear actions: **Take Photo / 拍攝相片** and **Choose Photo / 選擇相片**.
+- Added photo filename display and retained remove-photo control.
+- Added **Edit / 編輯** to Open Issues.
+- Open reports can now be loaded back into the form and saved without creating a duplicate ticket.
+- Included the v0.3.00 split Date/Time design and `23 Oct 2026 | 17:10` format.
+
+### v0.3.00
+
+- Split Incident Time into separate Date and Time fields.
+- Standardized display as `23 Oct 2026 | 17:10`.
 
 ### v0.2.00
 
