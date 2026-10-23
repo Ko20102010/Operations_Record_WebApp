@@ -4,7 +4,7 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 
 ## Current version
 
-**v0.5.00**
+**v0.6.00**
 
 ## Features
 
@@ -21,6 +21,15 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 - Mobile-first responsive layout
 
 ## Version history
+
+### v0.6.00
+
+- Redesigned the Home page as a compact Frontline dashboard.
+- Added dashboard cards for Open Issues, Operation Suspended, Reported Today and Local Storage Mode.
+- Added Recent Issues on the Home page.
+- Added persistent page selection with Home, a large central Create button, and Open Issues.
+- Renamed **Wire Problem / 「威也」問題** to **Wire Issue / 「威也」故障** after wording review.
+- Added a naming review rule: labels should describe the observable condition, avoid repeated category words, use consistent English and Hong Kong Traditional Chinese, and avoid implying a root cause that Frontline cannot confirm.
 
 ### v0.5.00
 
