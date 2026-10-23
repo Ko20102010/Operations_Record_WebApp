@@ -1,4 +1,4 @@
-# Deployment Guide v0.4.00
+# Deployment Guide v0.5.00
 
 ## GitHub Pages
 Upload `index.html`, `manifest.webmanifest`, `.nojekyll`, `README.md` and this file to the repository root. Enable GitHub Pages from the `main` branch and `/(root)` folder.
@@ -35,3 +35,6 @@ This package does not yet share data across devices. Recommended later options:
 - Firebase: managed authentication, database and storage.
 
 Never put admin passwords, service-role keys or database secrets inside `index.html` or a public GitHub repository.
+
+
+Upload `version.json` and `service-worker.js` to the repository root. Do not omit these files; they power update checks and cache replacement.

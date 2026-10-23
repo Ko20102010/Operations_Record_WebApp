@@ -4,7 +4,7 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 
 ## Current version
 
-**v0.4.00**
+**v0.5.00**
 
 ## Features
 
@@ -21,6 +21,16 @@ Mobile-first Frontline reporting WebApp for STW1 and STW2.
 - Mobile-first responsive layout
 
 ## Version history
+
+### v0.5.00
+
+- Added automatic checks against `version.json` on app startup, return to foreground, every 15 minutes, and before submit/edit actions.
+- Added optional and required update modes.
+- Required updates block report submission and editing until the latest version is loaded.
+- Added bilingual update banner and full-screen required-update dialog.
+- Added `service-worker.js` with versioned cache, old-cache cleanup, `skipWaiting()` and `clients.claim()`.
+- Added automatic draft saving before update and draft restoration after reload.
+- Added cache-busting version checks using `cache: no-store`.
 
 ### v0.4.00
 
@@ -101,3 +111,14 @@ Open `http://localhost:8080` in a browser.
 ## Security
 
 Do not place passwords, database service keys, API secrets or administrator credentials in `index.html` or a public repository.
+
+## Automatic update configuration
+
+Edit `version.json` for each release.
+
+- `version`: newest deployed version.
+- `minimumVersion`: oldest version allowed to submit or edit.
+- `forceUpdate`: set `true` to require immediate update.
+- `messageEn` and `messageZh`: update notice text.
+
+For a required update, set `version` and `minimumVersion` to the new release and set `forceUpdate` to `true`. For an optional update, keep `minimumVersion` at the older allowed version and set `forceUpdate` to `false`.
