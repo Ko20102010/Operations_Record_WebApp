@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#176bd8">
-  <meta name="description" content="Operations Support frontline issue reporting v0.1.00">
-  <title>Operations Support v0.1.00</title>
+  <meta name="description" content="Operations Support frontline issue reporting v0.2.00">
+  <title>Operations Support v0.2.00</title>
   <link rel="manifest" href="manifest.webmanifest">
   <style>
     :root{--blue:#176bd8;--blueSoft:#edf4ff;--orange:#bd6909;--orangeSoft:#fff3df;--purple:#7355c5;--purpleSoft:#f2eeff;--green:#137b53;--greenSoft:#e7f7ef;--amber:#b66a00;--amberSoft:#fff3da;--red:#c52e3a;--redSoft:#fff0f1;--bg:#f3f6fa;--card:#fff;--text:#172238;--muted:#68778a;--line:#dbe4ee}
@@ -23,13 +23,13 @@
 </head>
 <body>
 <div class="app">
-<header class="head"><span class="version">v0.1.00</span><strong>Operations Support</strong><small>前線故障報告</small></header>
+<header class="head"><span class="version">v0.2.00</span><strong>Operations Support</strong><small>前線故障報告</small></header>
 <main class="main">
 <section id="homePage" class="page active">
   <h1 class="title">Frontline <small>前線報告</small></h1>
   <button class="hero" id="startReport" type="button"><span class="plus">+</span><span><b>Report an Issue</b><small>報告故障</small></span></button>
   <div class="home-card"><div class="home-row"><span><b>Open Issues</b><span class="sub">未完成問題</span></span><button id="viewIssues" type="button">View 查看</button></div></div>
-  <div class="home-card"><b>Version v0.1.00</b><span class="sub">Static MVP. Reports are saved in this browser only.</span><span class="sub">靜態測試版，報告目前只儲存在此瀏覽器。</span></div>
+  <div class="home-card"><b>Version v0.2.00</b><span class="sub">Static MVP. Reports are saved in this browser only.</span><span class="sub">靜態測試版，報告目前只儲存在此瀏覽器。</span></div>
 </section>
 <section id="formPage" class="page">
   <button class="back" type="button" data-home>‹ Back 返回</button>
@@ -41,14 +41,14 @@
   <div class="field"><label class="label" for="incidentTime">Incident Time 事發時間 <span class="req">*</span></label><input id="incidentTime" class="control" type="datetime-local" required><span class="sub">Defaults to current Hong Kong time and can be adjusted. 預設為香港目前時間，可按實際情況修改。</span></div>
   <div class="field"><label class="label">Issue Type 問題類別 <span class="req">*</span></label><div class="types">
     <button type="button" class="type" data-type="mechanical">Mechanical<span>機械問題</span></button>
-    <button type="button" class="type" data-type="it">IT System<span>資訊系統</span></button>
+    <button type="button" class="type" data-type="it">IT System<span>IT系統</span></button>
     <button type="button" class="type" data-type="replenishment">Replenishment<span>補料問題</span></button>
   </div></div>
   <section id="g-mechanical" class="field group"><label class="label">Select an Issue 選擇相關問題 <span class="req">*</span></label><div class="options">
     <button type="button" class="option" data-value="Gate Not Working" data-zh="閘門不能運作">Gate Not Working<span>閘門不能運作</span></button>
     <button type="button" class="option" data-value="Uneven / No Discharge" data-zh="落料不平均／沒有落料">Uneven / No Discharge<span>落料不平均／沒有落料</span></button>
     <button type="button" class="option" data-value="Blockage / Buildup" data-zh="堵塞／積料">Blockage / Buildup<span>堵塞／積料</span></button>
-    <button type="button" class="option" data-value="Wire Rope Problem" data-zh="鋼絲繩問題">Wire Rope Problem<span>鋼絲繩問題</span></button>
+    <button type="button" class="option" data-value="Wire Problem" data-zh="「威也」問題">Wire Problem<span>「威也」問題</span></button>
     <button type="button" class="option" data-value="Material Leakage" data-zh="漏料">Material Leakage<span>漏料</span></button>
     <button type="button" class="option" data-value="Emergency Stop Problem" data-zh="急停掣問題">Emergency Stop Problem<span>急停掣問題</span></button>
     <button type="button" class="option wide" data-value="Other" data-zh="其他機械問題">Other<span>其他機械問題</span></button>
@@ -56,23 +56,23 @@
   <section id="g-it" class="field group"><label class="label">Select a System 選擇相關系統 <span class="req">*</span></label><div class="options">
     <button type="button" class="option" data-value="OCR" data-zh="車牌／資料辨識">OCR<span>車牌／資料辨識</span></button><button type="button" class="option" data-value="PTV" data-zh="PTV 系統">PTV<span>PTV 系統</span></button><button type="button" class="option" data-value="PLC" data-zh="PLC 控制系統">PLC<span>PLC 控制系統</span></button><button type="button" class="option" data-value="Network / Server" data-zh="網絡／伺服器">Network / Server<span>網絡／伺服器</span></button><button type="button" class="option wide" data-value="Unable to Identify" data-zh="未能確認">Unable to Identify<span>未能確認</span></button>
   </div><div id="itNote" class="note">Please describe what happened. IT staff will identify and reclassify the affected system.<br>請簡單說明現場情況，IT 同事會確認受影響系統並重新分類。</div></section>
-  <section id="g-replenishment" class="field group"><label class="label">Select an Issue 選擇補料問題 <span class="req">*</span></label><div class="options"><button type="button" class="option" data-value="Conveyor Breakdown" data-zh="輸送帶故障">Conveyor Breakdown<span>輸送帶故障</span></button><button type="button" class="option" data-value="Conveyor Mud Cleaning" data-zh="輸送帶清泥">Conveyor Mud Cleaning<span>輸送帶清泥</span></button><button type="button" class="option wide" data-value="Out of Stock" data-zh="物料缺貨">Out of Stock<span>物料缺貨</span></button></div></section>
-  <div class="field"><label class="label">Current Impact 目前影響 <span class="req">*</span></label><div class="impact"><button type="button" class="continue" data-impact="Can Continue Working" data-zh="可以繼續運作">Can Continue Working <strong>✓</strong><span>可以繼續運作</span></button><button type="button" class="difficulty" data-impact="Operating with Difficulty" data-zh="仍可運作但受到影響">Operating with Difficulty <strong>!</strong><span>仍可運作但受到影響</span></button><button type="button" class="stopped" data-impact="Operation Cannot Continue" data-zh="無法繼續運作">Operation Cannot Continue <strong>×</strong><span>無法繼續運作</span></button></div></div>
+  <section id="g-replenishment" class="field group"><label class="label">Select an Issue 選擇補料問題 <span class="req">*</span></label><div class="options"><button type="button" class="option" data-value="Conveyor Breakdown" data-zh="輸送帶故障">Conveyor Breakdown<span>輸送帶故障</span></button><button type="button" class="option" data-value="Conveyor Mud Cleaning" data-zh="輸送帶清泥">Conveyor Mud Cleaning<span>輸送帶清泥</span></button><button type="button" class="option wide" data-value="Stock Empty" data-zh="清缸">Stock Empty<span>清缸</span></button></div></section>
+  <div class="field"><label class="label">Operating Status 運作情況 <span class="req">*</span></label><div class="impact"><button type="button" class="continue" data-impact="Normal Operation" data-zh="正常運作">Normal Operation <strong>✓</strong><span>正常運作</span></button><button type="button" class="difficulty" data-impact="Limited Operation" data-zh="有限度運作">Limited Operation <strong>!</strong><span>有限度運作</span></button><button type="button" class="stopped" data-impact="Operation Suspended" data-zh="暫停運作">Operation Suspended <strong>×</strong><span>暫停運作</span></button></div></div>
   <div class="field"><label class="label" for="photo">Photo 相片 <span class="sub">Optional 選填</span></label><label class="photo" for="photo"><b>Take Photo or Upload</b><small>拍攝或上載相片</small><input id="photo" type="file" accept="image/*" capture="environment"></label><div id="photoPreview" class="photo-preview"><img id="photoImg" alt="Selected issue photo"><button id="removePhoto" type="button" class="remove">Remove Photo 移除相片</button></div></div>
   <div class="field"><label id="remarkLabel" class="label" for="remark">What Happened? 情況說明 <span class="sub">Optional 選填</span></label><textarea id="remark" class="control" rows="3" maxlength="500" placeholder="Briefly describe what happened 請簡單說明現場情況"></textarea></div>
-  <div id="previewWrap" class="field preview-wrap"><label class="label">Preview 預覽</label><div class="preview"><div class="preview-head"><span id="previewStatus" class="status">填寫中</span></div><div class="preview-row"><span>Plant 廠房</span><b id="pvPlant">未選擇</b></div><div class="preview-row"><span>Material 物料</span><b id="pvMaterial">未選擇</b></div><div class="preview-row"><span>Incident Time 事發時間</span><b id="pvIncidentTime">未選擇</b></div><div class="preview-row"><span>Issue Type 類別</span><b id="pvType">未選擇</b></div><div class="preview-row"><span>Issue 問題</span><b id="pvIssue">未選擇</b></div><div class="preview-row"><span>Impact 影響</span><b id="pvImpact">未選擇</b></div><div id="pvDetailsRow" class="preview-row" hidden><span>Details 說明</span><b id="pvDetails"></b></div></div></div>
+  <div id="previewWrap" class="field preview-wrap"><label class="label">Preview 預覽</label><div class="preview"><div class="preview-head"><span id="previewStatus" class="status">填寫中</span></div><div class="preview-row"><span>Plant 廠房</span><b id="pvPlant">未選擇</b></div><div class="preview-row"><span>Material 物料</span><b id="pvMaterial">未選擇</b></div><div class="preview-row"><span>Incident Time 事發時間</span><b id="pvIncidentTime">未選擇</b></div><div class="preview-row"><span>Issue Type 類別</span><b id="pvType">未選擇</b></div><div class="preview-row"><span>Issue 問題</span><b id="pvIssue">未選擇</b></div><div class="preview-row"><span>Operating Status 運作情況</span><b id="pvImpact">未選擇</b></div><div id="pvDetailsRow" class="preview-row" hidden><span>Details 說明</span><b id="pvDetails"></b></div></div></div>
   <button id="submit" type="button" class="submit" disabled>Submit Report 提交報告</button>
 </section>
 <section id="successPage" class="page"><div class="success"><div class="check">✓</div><h2>Report Submitted</h2><div>報告已成功提交</div><p>Other users can view this report only after a shared backend is connected.<br>連接共享後端後，其他使用者才可查看此報告。</p><div id="reference" class="reference"></div><div class="message-card"><label class="label">Message Language 訊息語言<span class="sub">請選擇要複製的訊息語言</span></label><div class="languages"><button type="button" class="language selected" data-lang="zh">中文</button><button type="button" class="language" data-lang="en">English</button></div><textarea id="message" class="message" readonly></textarea><div class="actions"><button id="copy" type="button" class="action primary">複製中文訊息</button><button id="whatsapp" type="button" class="action wa">開啟 WhatsApp</button></div><div id="copyStatus" class="copy-status" aria-live="polite"></div></div><button id="another" type="button" class="action light" style="width:100%;margin-top:10px">Report Another Issue 再報告故障</button></div></section>
 <section id="issuesPage" class="page"><button class="back" type="button" data-home>‹ Back 返回</button><h1 class="title">Open Issues <small>未完成問題</small></h1><div id="issueList" class="issue-list"></div></section>
 </main></div>
 <script>
-// Operations Support Frontline WebApp v0.1.00
+// Operations Support Frontline WebApp v0.2.00
 (() => {
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   const pages=$$('.page'), plant=$('#plant'), material=$('#material'), incidentTime=$('#incidentTime'), remark=$('#remark'), submit=$('#submit');
   let state={type:'',issue:'',issueZh:'',impact:'',impactZh:'',lang:'zh',ticket:''};
-  const typeText={mechanical:{en:'Mechanical',zh:'機械問題'},it:{en:'IT System',zh:'資訊系統'},replenishment:{en:'Replenishment',zh:'補料問題'}};
+  const typeText={mechanical:{en:'Mechanical',zh:'機械問題'},it:{en:'IT System',zh:'IT系統'},replenishment:{en:'Replenishment',zh:'補料問題'}};
   const show=id=>pages.forEach(p=>p.classList.toggle('active',p.id===id));
   const needsDetails=()=>state.issue==='Other'||state.issue==='Unable to Identify';
   const pad=n=>String(n).padStart(2,'0');
@@ -90,7 +90,7 @@
     const validTime=incidentTime.value&&new Date(incidentTime.value).getTime()<=Date.now()+60000;
     const ready=Boolean(plant.value&&material.value&&validTime&&state.type&&state.issue&&state.impact&&(!need||details)); submit.disabled=!ready;
     const badge=$('#previewStatus'); badge.className='status';
-    if(!ready) badge.textContent='填寫中'; else if(state.impact==='Operation Cannot Continue'){badge.textContent='無法運作';badge.classList.add('red')} else if(state.impact==='Operating with Difficulty'){badge.textContent='運作受影響';badge.classList.add('amber')} else {badge.textContent='可以運作';badge.classList.add('green')}
+    if(!ready) badge.textContent='填寫中'; else if(state.impact==='Operation Suspended'){badge.textContent='暫停運作';badge.classList.add('red')} else if(state.impact==='Limited Operation'){badge.textContent='有限度運作';badge.classList.add('amber')} else {badge.textContent='正常運作';badge.classList.add('green')}
   }
   $('#startReport').addEventListener('click',()=>show('formPage')); $('#viewIssues').addEventListener('click',renderIssues); $$('[data-home]').forEach(b=>b.addEventListener('click',()=>show('homePage')));
   $$('.type').forEach(btn=>btn.addEventListener('click',()=>{ $$('.type,.option').forEach(x=>x.classList.remove('selected')); btn.classList.add('selected'); state.type=btn.dataset.type;state.issue='';state.issueZh=''; ['mechanical','it','replenishment'].forEach(x=>$('#g-'+x).classList.toggle('show',x===state.type)); $('#itNote').classList.remove('show'); update(); }));
@@ -98,15 +98,15 @@
   $$('.impact button').forEach(btn=>btn.addEventListener('click',()=>{ $$('.impact button').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');state.impact=btn.dataset.impact;state.impactZh=btn.dataset.zh;update(); }));
   [plant,material,incidentTime].forEach(x=>x.addEventListener('change',update)); remark.addEventListener('input',update);
   $('#photo').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(f&&f.type.startsWith('image/')){$('#photoImg').src=URL.createObjectURL(f);$('#photoPreview').classList.add('show')}else{e.target.value='';$('#photoPreview').classList.remove('show')}}); $('#removePhoto').addEventListener('click',()=>{$('#photo').value='';$('#photoPreview').classList.remove('show')});
-  function buildMessage(){const lines=state.lang==='zh'?[`廠房：${plant.value}`,`物料：${material.value}`,`事發時間：${formatIncident(incidentTime.value)}`,`問題類別：${typeText[state.type].zh}`,`相關問題：${state.issueZh}`,`目前影響：${state.impactZh}`]:[`Plant: ${plant.value}`,`Material: ${material.value}`,`Incident Time: ${formatIncident(incidentTime.value)}`,`Issue Type: ${typeText[state.type].en}`,`Issue: ${state.issue}`,`Impact: ${state.impact}`];const d=remark.value.trim();if(d)lines.push(state.lang==='zh'?`情況說明：${d}`:`Remark: ${d}`);return lines.join('\n')}
+  function buildMessage(){const lines=state.lang==='zh'?[`廠房：${plant.value}`,`物料：${material.value}`,`事發時間：${formatIncident(incidentTime.value)}`,`問題類別：${typeText[state.type].zh}`,`相關問題：${state.issueZh}`,`運作情況：${state.impactZh}`]:[`Plant: ${plant.value}`,`Material: ${material.value}`,`Incident Time: ${formatIncident(incidentTime.value)}`,`Issue Type: ${typeText[state.type].en}`,`Issue: ${state.issue}`,`Operating Status: ${state.impact}`];const d=remark.value.trim();if(d)lines.push(state.lang==='zh'?`情況說明：${d}`:`Remark: ${d}`);return lines.join('\n')}
   function renderMessage(){$('#message').value=buildMessage();$('#copy').textContent=state.lang==='zh'?'複製中文訊息':'Copy English Message';$('#whatsapp').textContent=state.lang==='zh'?'開啟 WhatsApp':'Open WhatsApp';$$('.language').forEach(b=>b.classList.toggle('selected',b.dataset.lang===state.lang));$('#copyStatus').textContent=''}
-  submit.addEventListener('click',()=>{if(submit.disabled)return;const d=new Date(),date=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');state.ticket=plant.value+'-'+date+'-'+String(Math.floor(Math.random()*900)+100);const issue={ticket:state.ticket,plant:plant.value,material:material.value,incidentTime:incidentTime.value,submittedTime:new Date().toISOString(),type:state.type,issue:state.issue,issueZh:state.issueZh,impact:state.impact,impactZh:state.impactZh,remark:remark.value.trim(),createdAt:new Date().toISOString(),status:'Reported'};const arr=JSON.parse(localStorage.getItem('ops_issues_v010')||'[]');arr.unshift(issue);localStorage.setItem('ops_issues_v010',JSON.stringify(arr));$('#reference').textContent='Reference Number 參考編號：'+state.ticket;state.lang='zh';renderMessage();show('successPage')});
+  submit.addEventListener('click',()=>{if(submit.disabled)return;const d=new Date(),date=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');state.ticket=plant.value+'-'+date+'-'+String(Math.floor(Math.random()*900)+100);const issue={ticket:state.ticket,plant:plant.value,material:material.value,incidentTime:incidentTime.value,submittedTime:new Date().toISOString(),type:state.type,issue:state.issue,issueZh:state.issueZh,impact:state.impact,impactZh:state.impactZh,remark:remark.value.trim(),createdAt:new Date().toISOString(),status:'Reported'};const arr=JSON.parse(localStorage.getItem('ops_issues_v020')||'[]');arr.unshift(issue);localStorage.setItem('ops_issues_v020',JSON.stringify(arr));$('#reference').textContent='Reference Number 參考編號：'+state.ticket;state.lang='zh';renderMessage();show('successPage')});
   $$('.language').forEach(b=>b.addEventListener('click',()=>{state.lang=b.dataset.lang;renderMessage()}));
   $('#copy').addEventListener('click',async()=>{const t=$('#message');try{await navigator.clipboard.writeText(t.value);$('#copyStatus').textContent=state.lang==='zh'?'中文訊息已複製。':'English message copied.'}catch(e){t.focus();t.select();$('#copyStatus').textContent=state.lang==='zh'?'訊息已選取，請手動複製。':'Message selected. Please copy manually.'}});
   $('#whatsapp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('#message').value),'_blank','noopener,noreferrer'));
   $('#another').addEventListener('click',reset);
   function reset(){state={type:'',issue:'',issueZh:'',impact:'',impactZh:'',lang:'zh',ticket:''};plant.value='';material.value='';incidentTime.value=localDateTimeValue();incidentTime.max=localDateTimeValue();remark.value='';$('#photo').value='';$('#photoPreview').classList.remove('show');$$('.selected').forEach(x=>x.classList.remove('selected'));$$('.group').forEach(x=>x.classList.remove('show'));$('#itNote').classList.remove('show');update();show('formPage')}
-  function renderIssues(){const arr=JSON.parse(localStorage.getItem('ops_issues_v010')||'[]');$('#issueList').innerHTML=arr.length?arr.map(x=>`<article class="issue-card"><b>${x.ticket}</b><h3>${x.plant} · ${x.material}</h3><div>${typeText[x.type]?.zh||x.type} · ${x.issueZh||x.issue}</div><div class="sub">事發時間：${x.incidentTime?formatIncident(x.incidentTime):'未記錄'} · ${x.impactZh||x.impact}</div></article>`).join(''):'<div class="home-card">No open issues yet.<span class="sub">尚未有未完成問題。</span></div>';show('issuesPage')}
+  function renderIssues(){const arr=JSON.parse(localStorage.getItem('ops_issues_v020')||'[]');$('#issueList').innerHTML=arr.length?arr.map(x=>`<article class="issue-card"><b>${x.ticket}</b><h3>${x.plant} · ${x.material}</h3><div>${typeText[x.type]?.zh||x.type} · ${x.issueZh||x.issue}</div><div class="sub">事發時間：${x.incidentTime?formatIncident(x.incidentTime):'未記錄'} · ${x.impactZh||x.impact}</div></article>`).join(''):'<div class="home-card">No open issues yet.<span class="sub">尚未有未完成問題。</span></div>';show('issuesPage')}
   incidentTime.value=localDateTimeValue(); incidentTime.max=localDateTimeValue(); update();
 })();
 </script>
