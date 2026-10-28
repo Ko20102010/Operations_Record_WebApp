@@ -1,4 +1,7 @@
-# Deployment v0.8.01
+# Deployment v0.8.02
 Upload every file in this folder to the GitHub repository root. Do not omit report.html, issues.html, success.html, styles.css, config.js, app.js or report.js. Enable GitHub Pages from main and /(root).
 
 Upload edit.html and completed.html as well.
+
+
+For v0.8.02, upload all files and allow GitHub Pages to redeploy before testing. The Service Worker cache name is operations-support-v0.8.02.
