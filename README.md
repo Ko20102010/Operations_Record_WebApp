@@ -1,18 +1,26 @@
 # Operations Support Frontline WebApp
 
 ## Current version
-**v0.8.00**
+**v0.8.01**
 
 ## Version history
 
-### v0.8.00 additions
+### v0.8.01
+- Redesigned Recent Reports, Open Issues and Completed Issues cards for clearer mobile scanning.
+- Added a dedicated pencil icon button on the right side of every editable report card.
+- Replaced the large bottom Edit text button with a compact 40px icon action.
+- Improved spacing and separation between Completed and View All actions.
+- Added ellipsis handling for long bilingual issue names.
+
+
+### v0.8.01 additions
 - Changed the success page so **Back to Home / 返回主頁** is the final and only button in its row.
 - Added Frontline edit/update capability for reported issues.
 - Added Issue Status values: **Reported / 已報告**, **In Progress / 處理中**, and **Completed / 已完成**.
 - Frontline users can update both Operating Status and Issue Status, and add an update note.
 - Completed records move out of Open Issues but remain available under Completed Issues.
 
-### v0.8.00
+### v0.8.01
 - Adopted the approved SafetyCulture-inspired colour and component system.
 - Removed the plus icon from the Home report card; the bottom navigation now contains the only visible `+` action.
 - Set the central `+` button to 58px with no visible text label.
