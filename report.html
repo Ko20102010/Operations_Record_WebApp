@@ -1,1 +1,101 @@
-<!doctype html><html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Report an Issue v0.8.02</title><link rel="stylesheet" href="styles.css"></head><body><div class="app"><header class="header"><span class="version">v0.8.02</span><strong>Operations Support</strong><small>前線故障報告</small></header><main class="main"><a class="back" href="index.html">‹ Back 返回</a><h1 class="page-title">Report an Issue <small>報告故障</small></h1><div class="grid2"><div class="field"><label class="label">Plant 廠房 <span class="required">*</span></label><select id="plant"><option value="">Select 選擇</option></select></div><div class="field"><label class="label">Material 物料 <span class="required">*</span></label><select id="material"><option value="">Select 選擇</option></select></div></div><div class="field"><label class="label">Incident Time 事發時間 <span class="required">*</span></label><div class="grid2"><div><span class="sub">Date 日期</span><input id="date" type="date"></div><div><span class="sub">Time 時間</span><input id="time" type="time"></div></div></div><div class="field"><label class="label">Issue Type 問題類別 <span class="required">*</span></label><div id="typeGrid" class="type-grid"></div></div><div id="optionWrap" class="field conditional"><label id="optionLabel" class="label">Related Issue 相關問題 <span class="required">*</span></label><div id="optionGrid" class="option-grid"></div></div><div class="field"><label class="label">Operating Status 運作情況 <span class="required">*</span></label><div id="statusGrid" class="status-grid"><button class="choice no-impact" data-en="No Operational Impact" data-zh="不影響運作">No Operational Impact<small>不影響運作</small></button><button class="choice limited" data-en="Limited Operation" data-zh="有限度運作">Limited Operation<small>有限度運作</small></button><button class="choice suspended" data-en="Operation Suspended" data-zh="暫停運作">Operation Suspended<small>暫停運作</small></button></div></div><div class="field"><label class="label">Photo 相片 <span class="sub">Optional 選填</span></label><div class="photo-actions"><button id="take" class="action primary">Take Photo 拍攝相片</button><button id="choose" class="action secondary">Choose Photo 選擇相片</button></div><input id="camera" type="file" accept="image/*" capture="environment" hidden><input id="gallery" type="file" accept="image/*" hidden><div id="photoPreview" class="photo-preview"><img id="photoImg"><div id="photoName" class="sub"></div><button id="remove" class="text-link">Remove Photo 移除相片</button></div></div><div class="field"><label id="remarkLabel" class="label">What Happened? 情況說明 <span class="sub">Optional 選填</span></label><textarea id="remark" rows="3" placeholder="Briefly describe what you observed 請簡單說明現場所見情況"></textarea></div><div id="preview" class="field preview"><label class="label">Preview 預覽</label><div class="preview-row"><span>Plant 廠房</span><b id="pvPlant"></b></div><div class="preview-row"><span>Material 物料</span><b id="pvMaterial"></b></div><div class="preview-row"><span>Incident Time</span><b id="pvTime"></b></div><div class="preview-row"><span>Issue Type</span><b id="pvType"></b></div><div class="preview-row"><span>Related Issue</span><b id="pvIssue"></b></div><div class="preview-row"><span>Operating Status</span><b id="pvStatus"></b></div></div><button id="submit" class="submit" disabled>Submit Report 提交報告</button></main><nav class="bottom-nav"><a class="nav-link" href="index.html"><span>⌂</span>Home 主頁</a><div class="plus-wrap"><a class="plus-button" href="report.html" aria-label="Report an Issue 報告故障">+</a></div><a class="nav-link" href="issues.html"><span>◷</span>Open 未完成</a></nav></div><div id="updateOverlay" class="update-overlay"><div class="update-dialog"><h2>Update Required 需要更新</h2><p>請先更新版本，然後再提交或編輯報告。</p><button class="submit" onclick="location.reload()">Update Now 立即更新</button></div></div><script src="config.js"></script><script src="app.js"></script><script src="report.js"></script></body></html>
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Report an Issue v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header"><span class="version">v0.8.11</span><strong class="bilingual-en">Operations Support</strong><small class="bilingual-zh" lang="zh-HK">前線故障報告</small></header>
+    <main id="main" class="main">
+      <a class="back" href="index.html"><span class="bilingual-en">‹ Back</span><span class="bilingual-zh" lang="zh-HK">‹ 返回</span></a>
+      <h1 class="page-title"><span class="bilingual-en">Report an Issue</span><small class="bilingual-zh" lang="zh-HK">報告故障</small></h1>
+      <p class="form-intro"><span class="bilingual-en">Fields marked with * are required.</span><span class="bilingual-zh" lang="zh-HK">標有 * 的項目為必填。</span></p>
+
+      <div class="grid2">
+        <div class="field"><label class="label" for="plant"><span class="bilingual-en">Plant</span><span class="bilingual-zh" lang="zh-HK">廠房</span> <span class="required">*</span></label><select id="plant" required><option value="">Select</option></select></div>
+        <div class="field"><label class="label" for="material"><span class="bilingual-en">Material</span><span class="bilingual-zh" lang="zh-HK">物料</span> <span class="required">*</span></label><select id="material" required><option value="">Select</option></select></div>
+      </div>
+
+      <fieldset class="field fieldset-reset">
+        <legend class="label"><span class="bilingual-en">Incident time</span><span class="bilingual-zh" lang="zh-HK">事發時間</span> <span class="required">*</span></legend>
+        <div class="grid2">
+          <div><label class="sub field-sub" for="date"><span class="bilingual-en">Date</span><span class="bilingual-zh" lang="zh-HK">日期</span></label><input id="date" type="date" required></div>
+          <div><label class="sub field-sub" for="time"><span class="bilingual-en">Time</span><span class="bilingual-zh" lang="zh-HK">時間</span></label><input id="time" type="time" required></div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field fieldset-reset">
+        <legend id="typeLabel" class="label"><span class="bilingual-en">Issue type</span><span class="bilingual-zh" lang="zh-HK">問題類別</span> <span class="required">*</span></legend>
+        <div id="typeGrid" class="type-grid"></div>
+      </fieldset>
+
+      <fieldset id="optionWrap" class="field fieldset-reset conditional">
+        <legend id="optionLabel" class="label"><span class="bilingual-en">Related issue</span><span class="bilingual-zh" lang="zh-HK">相關問題</span> <span class="required">*</span></legend>
+        <div id="optionGrid" class="option-grid"></div>
+      </fieldset>
+
+      <fieldset class="field fieldset-reset">
+        <legend id="statusLabel" class="label"><span class="bilingual-en">Operating status</span><span class="bilingual-zh" lang="zh-HK">運作情況</span> <span class="required">*</span></legend>
+        <div id="statusGrid" class="status-grid">
+          <button type="button" class="choice no-impact" data-en="No Operational Impact" data-zh="不影響運作" aria-pressed="false"><span class="bilingual-en">No Operational Impact</span><span class="bilingual-zh" lang="zh-HK">不影響運作</span></button>
+          <button type="button" class="choice limited" data-en="Limited Operation" data-zh="有限度運作" aria-pressed="false"><span class="bilingual-en">Limited Operation</span><span class="bilingual-zh" lang="zh-HK">有限度運作</span></button>
+          <button type="button" class="choice suspended" data-en="Operation Suspended" data-zh="暫停運作" aria-pressed="false"><span class="bilingual-en">Operation Suspended</span><span class="bilingual-zh" lang="zh-HK">暫停運作</span></button>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <span id="photoLabel" class="label"><span class="bilingual-en">Photo</span><span class="bilingual-zh" lang="zh-HK">相片</span> <span class="sub"><span class="bilingual-en">Optional</span><span class="bilingual-zh" lang="zh-HK">選填</span></span></span>
+        <div class="photo-actions">
+          <button id="take" class="action primary bilingual-control" type="button"><span class="bilingual-en">Take photo</span><span class="bilingual-zh" lang="zh-HK">拍攝相片</span></button>
+          <button id="choose" class="action secondary bilingual-control" type="button"><span class="bilingual-en">Choose photo</span><span class="bilingual-zh" lang="zh-HK">選擇相片</span></button>
+        </div>
+        <input id="camera" type="file" accept="image/*" capture="environment" aria-labelledby="photoLabel" hidden>
+        <input id="gallery" type="file" accept="image/*" aria-labelledby="photoLabel" hidden>
+        <div id="photoPreview" class="photo-preview">
+          <img id="photoImg" alt="Selected report photo 報告相片預覽">
+          <div id="photoName" class="sub" role="status" aria-live="polite"></div>
+          <button id="remove" class="text-link bilingual-control" type="button"><span class="bilingual-en">Remove photo</span><span class="bilingual-zh" lang="zh-HK">移除相片</span></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="remarkLabel" class="label" for="remark"><span class="bilingual-en">What happened?</span><span class="bilingual-zh" lang="zh-HK">情況說明</span> <span class="sub"><span class="bilingual-en">Optional</span><span class="bilingual-zh" lang="zh-HK">選填</span></span></label>
+        <textarea id="remark" rows="3" data-en-placeholder="Briefly describe what you observed" data-zh-placeholder="請簡單說明現場所見情況"></textarea>
+      </div>
+
+      <section id="preview" class="field preview" aria-labelledby="previewHeading">
+        <h2 id="previewHeading" class="label"><span class="bilingual-en">Preview</span><span class="bilingual-zh" lang="zh-HK">預覽</span></h2>
+        <div class="preview-row"><span><span class="bilingual-en">Plant</span><span class="bilingual-zh" lang="zh-HK">廠房</span></span><b id="pvPlant"></b></div>
+        <div class="preview-row"><span><span class="bilingual-en">Material</span><span class="bilingual-zh" lang="zh-HK">物料</span></span><b id="pvMaterial"></b></div>
+        <div class="preview-row"><span><span class="bilingual-en">Incident time</span><span class="bilingual-zh" lang="zh-HK">事發時間</span></span><b id="pvTime"></b></div>
+        <div class="preview-row"><span><span class="bilingual-en">Issue type</span><span class="bilingual-zh" lang="zh-HK">問題類別</span></span><b id="pvType"></b></div>
+        <div class="preview-row"><span><span class="bilingual-en">Related issue</span><span class="bilingual-zh" lang="zh-HK">相關問題</span></span><b id="pvIssue"></b></div>
+        <div class="preview-row"><span><span class="bilingual-en">Operating status</span><span class="bilingual-zh" lang="zh-HK">運作情況</span></span><b id="pvStatus"></b></div>
+      </section>
+
+      <button id="submit" class="submit bilingual-control" type="button" disabled><span class="bilingual-en">Submit report</span><span class="bilingual-zh" lang="zh-HK">提交報告</span></button>
+    </main>
+    <nav class="bottom-nav" data-aria-en="Main navigation" data-aria-zh="主導覽" aria-label="Main navigation">
+      <a class="nav-link" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create active" href="report.html" aria-current="page" data-aria-en="Create a new report" data-aria-zh="建立新報告" aria-label="Create a new report"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link" href="issues.html"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link" href="history.html"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <div id="updateOverlay" class="update-overlay" role="alertdialog" aria-modal="true" aria-labelledby="updateTitle" aria-describedby="updateMessage">
+    <div class="update-dialog">
+      <h2 id="updateTitle"><span class="bilingual-en">Update required</span><span class="bilingual-zh" lang="zh-HK">需要更新</span></h2>
+      <p id="updateMessage"><span class="bilingual-en">Please update before submitting or editing reports.</span><span class="bilingual-zh" lang="zh-HK">請先更新版本，然後再提交或編輯報告。</span></p>
+      <button class="submit bilingual-control" type="button" onclick="location.reload()"><span class="bilingual-en">Update now</span><span class="bilingual-zh" lang="zh-HK">立即更新</span></button>
+    </div>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script src="report.js?v=0.8.11"></script>
+</body>
+</html>

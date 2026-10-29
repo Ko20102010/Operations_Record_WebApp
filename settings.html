@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Settings v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header"><span class="version">v0.8.11</span><strong class="bilingual-en">Operations Support</strong><small class="bilingual-zh" lang="zh-HK">前線故障報告</small></header>
+    <main id="main" class="main">
+      <a class="back" href="index.html"><span class="bilingual-en">‹ Back</span><span class="bilingual-zh" lang="zh-HK">‹ 返回</span></a>
+      <h1 class="page-title"><span class="bilingual-en">Settings</span><span class="bilingual-zh" lang="zh-HK">設定</span></h1>
+      <section class="history-controls" aria-labelledby="languageHeading">
+        <h2 id="languageHeading" class="section-title"><span class="bilingual-en">Language</span><span class="bilingual-zh" lang="zh-HK">語言</span></h2>
+        <div class="language-settings" role="group" aria-labelledby="languageHeading">
+          <button type="button" class="language-option" data-language="en" aria-pressed="false">English</button>
+          <button type="button" class="language-option" data-language="zh" aria-pressed="false" lang="zh-HK">繁體中文</button>
+        </div>
+      </section>
+    </main>
+    <nav class="bottom-nav" data-aria-en="Main navigation" data-aria-zh="主導覽" aria-label="Main navigation">
+      <a class="nav-link" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create" href="report.html" aria-label="Create a new report 建立新報告"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link" href="issues.html"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link" href="history.html"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script>
+    const languageButtons = [...document.querySelectorAll('.language-option')];
+    languageButtons.forEach(button => {
+      const selected = button.dataset.language === OPS.getLanguage();
+      button.setAttribute('aria-pressed', String(selected));
+      button.onclick = () => {
+        localStorage.setItem(OPS.LANGUAGE_KEY, button.dataset.language);
+        const returnTo = sessionStorage.getItem('ops_settings_return');
+        sessionStorage.removeItem('ops_settings_return');
+        location.href = /^(index|report|issues|history|completed|edit|success)\.html(?:\?.*)?$/.test(returnTo || '') ? returnTo : 'index.html';
+      };
+    });
+  </script>
+</body>
+</html>

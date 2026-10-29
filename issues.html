@@ -1,1 +1,40 @@
-<!doctype html><html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Open Issues v0.8.02</title><link rel="stylesheet" href="styles.css"></head><body><div class="app"><header class="header"><span class="version">v0.8.02</span><strong>Operations Support</strong><small>前線故障報告</small></header><main class="main"><a class="back" href="index.html">‹ Back 返回</a><h1 class="page-title">Open Issues <small>未完成問題</small></h1><div id="issues" class="list"></div></main><nav class="bottom-nav"><a class="nav-link" href="index.html"><span>⌂</span>Home 主頁</a><div class="plus-wrap"><a class="plus-button" href="report.html">+</a></div><a class="nav-link active" href="issues.html"><span>◷</span>Open 未完成</a></nav></div><script src="config.js"></script><script src="app.js"></script><script>const pencil=`<span class="pencil-mark" aria-hidden="true"></span>`;const a=OPS.get().filter(x=>(x.workflowStatus||'Reported')!=='Completed');issues.className='report-list';issues.innerHTML=a.length?a.map(x=>{const w=x.workflowStatus||'Reported',wz=x.workflowStatusZh||'已報告';return `<article class="report-item ${OPS.statusClass(x.statusEn)}"><div class="report-main"><span class="report-primary">${x.plant} · ${x.material} · ${x.issueZh}</span><span class="report-secondary">${x.issueEn} · ${wz}</span><span class="report-meta">${OPS.fmt(x.incident)} · ${x.statusZh}</span></div><a class="pencil-button" href="edit.html?ticket=${encodeURIComponent(x.ticket)}" aria-label="Edit or update issue 編輯或更新問題">${pencil}</a></article>`}).join(''):'<div class="empty-state">尚未有未完成問題。</div>';</script></body></html>
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Open Issues v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header"><span class="version">v0.8.11</span><strong class="bilingual-en">Operations Support</strong><small class="bilingual-zh" lang="zh-HK">前線故障報告</small></header>
+    <main id="main" class="main">
+      <a class="back" href="index.html"><span class="bilingual-en">‹ Back</span><span class="bilingual-zh" lang="zh-HK">‹ 返回</span></a>
+      <h1 class="page-title"><span class="bilingual-en">Open issues</span><small class="bilingual-zh" lang="zh-HK">未完成問題</small></h1>
+      <p class="section-description"><span class="bilingual-en">Reports that still need attention</span><span class="bilingual-zh" lang="zh-HK">需要跟進的報告</span></p>
+      <div id="issues" class="report-list" aria-live="polite"></div>
+    </main>
+    <nav class="bottom-nav" aria-label="Main navigation 主導覽">
+      <a class="nav-link" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create" href="report.html" aria-label="Create a new report 建立新報告"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link active" href="issues.html" aria-current="page"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link" href="history.html"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script>
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+    const isChinese = OPS.getLanguage() === 'zh';
+    const records = OPS.get().filter(record => (record.workflowStatus || 'Reported') !== 'Completed');
+    if (records.length) {
+      issues.innerHTML = records.map(record => `<article class="report-item ${OPS.statusClass(record.statusEn)}"><div class="report-main"><span class="report-primary">${escapeHtml(record.plant || '—')} · ${escapeHtml(record.material || '—')} · ${escapeHtml(isChinese ? record.issueZh || '問題未提供' : record.issueEn || 'Issue details unavailable')}</span><span class="report-secondary">${escapeHtml(isChinese ? record.workflowStatusZh || '已報告' : record.workflowStatus || 'Reported')}</span><span class="report-meta">${escapeHtml(OPS.fmt(record.incident) || '—')} · ${escapeHtml(isChinese ? record.statusZh || '運作情況未提供' : record.statusEn || 'Operating status unavailable')}</span></div><a class="pencil-button" href="edit.html?ticket=${encodeURIComponent(record.ticket || '')}" aria-label="${isChinese ? '編輯或更新問題' : 'Edit or update issue'}"><span aria-hidden="true">&#9998;</span></a></article>`).join('');
+    } else {
+      issues.innerHTML = `<div class="dashboard-empty" role="status"><span class="empty-icon" aria-hidden="true">✓</span><h2>${isChinese ? '目前沒有未完成問題' : 'No open issues'}</h2><p>${isChinese ? '新報告會顯示在這裡。' : 'New reports will appear here.'}</p><a class="empty-action" href="report.html">${isChinese ? '建立報告' : 'Create a report'}</a></div>`;
+    }
+  </script>
+</body>
+</html>

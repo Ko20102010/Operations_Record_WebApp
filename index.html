@@ -1,1 +1,84 @@
-<!doctype html><html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Operations Support v0.8.02</title><link rel="stylesheet" href="styles.css"><link rel="manifest" href="manifest.webmanifest"></head><body><div class="app"><header class="header"><span class="version">v0.8.02</span><strong>Operations Support</strong><small>前線故障報告</small></header><main class="main"><div class="intro"><h1>Dashboard</h1><p>主頁概覽</p></div><div class="stats"><a class="stat open" href="issues.html"><small>Open</small><strong id="openCount">0</strong><span>未完成</span></a><div class="stat suspended"><small>Suspended</small><strong id="suspendedCount">0</strong><span>暫停運作</span></div><div class="stat today"><small>Today</small><strong id="todayCount">0</strong><span>今日報告</span></div></div><a class="report-card" href="report.html"><span><strong>Report an Issue</strong><small>報告故障</small></span><span class="arrow">›</span></a><div class="device-note"><b>This Device Only</b><span>報告目前只儲存在此裝置，暫未跨裝置共享。</span></div><div class="report-toolbar"><div class="report-toolbar-title"><b>Recent Reports</b><small>最近報告</small></div><div class="report-toolbar-actions"><a class="toolbar-link" href="completed.html">Completed 已完成</a><a class="toolbar-link" href="issues.html">View All 查看全部</a></div></div><div id="recent" class="report-list"></div></main><nav class="bottom-nav"><a class="nav-link active" href="index.html"><span>⌂</span>Home 主頁</a><div class="plus-wrap"><a class="plus-button" href="report.html" aria-label="Report an Issue 報告故障">+</a></div><a class="nav-link" href="issues.html"><span>◷</span>Open 未完成</a></nav></div><script src="config.js"></script><script src="app.js"></script><script>const a=OPS.get(),today=new Date().toISOString().slice(0,10);openCount.textContent=a.length;suspendedCount.textContent=a.filter(x=>x.statusEn==='Operation Suspended').length;todayCount.textContent=a.filter(x=>x.submitted.slice(0,10)===today).length;recent.innerHTML=a.length?a.slice(0,3).map(x=>`<article class="report-item ${OPS.statusClass(x.statusEn)}"><div class="report-main"><span class="report-primary">${x.plant} · ${x.material} · ${x.issueZh}</span><span class="report-secondary">${x.issueEn}</span><span class="report-meta">${OPS.fmt(x.incident)} · ${x.statusZh}</span></div><a class="pencil-button" href="edit.html?ticket=${encodeURIComponent(x.ticket)}" aria-label="Edit report 編輯報告"><span class="pencil-mark" aria-hidden="true"></span></a></article>`).join(''):'<div class="empty-state">尚未有報告。</div>';</script></body></html>
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Operations Support v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header">
+      <span class="version">v0.8.11</span>
+      <strong class="bilingual-en">Operations Support</strong>
+      <small class="bilingual-zh" lang="zh-HK">前線故障報告</small>
+    </header>
+    <main id="main" class="main">
+      <div class="dashboard-heading">
+        <div>
+          <p class="eyebrow"><span class="bilingual-en">FRONTLINE OPERATIONS</span><span class="bilingual-zh" lang="zh-HK">前線運作</span></p>
+          <h1><span class="bilingual-en">Dashboard</span><span class="bilingual-zh" lang="zh-HK">主頁概覽</span></h1>
+          <p class="page-subtitle"><span class="bilingual-en">A clear view of current reports</span><span class="bilingual-zh" lang="zh-HK">報告概覽</span></p>
+        </div>
+        <a class="dashboard-create" href="report.html"><span aria-hidden="true">+</span><span class="bilingual-control"><span class="bilingual-en">New report</span><span class="bilingual-zh" lang="zh-HK">新增報告</span></span></a>
+      </div>
+
+      <section class="dashboard-section" aria-labelledby="overview-heading">
+        <h2 id="overview-heading" class="section-title"><span class="bilingual-en">Overview</span><span class="bilingual-zh" lang="zh-HK">概覽</span></h2>
+        <div class="stats">
+          <a class="stat open" href="issues.html" aria-label="Open issues 未完成問題">
+            <span class="stat-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span>
+            <strong id="openCount">0</strong>
+            <span class="stat-description"><span class="bilingual-en">Needs attention</span><span class="bilingual-zh" lang="zh-HK">需要跟進</span></span>
+          </a>
+          <div class="stat suspended" aria-label="Suspended operations 暫停運作">
+            <span class="stat-label"><span class="bilingual-en">Suspended</span><span class="bilingual-zh" lang="zh-HK">暫停運作</span></span>
+            <strong id="suspendedCount">0</strong>
+            <span class="stat-description"><span class="bilingual-en">Currently affected</span><span class="bilingual-zh" lang="zh-HK">目前受影響</span></span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="device-note">
+        <span class="device-note-icon" aria-hidden="true">i</span>
+        <div><b><span class="bilingual-en">This device only</span><span class="bilingual-zh" lang="zh-HK">只限此裝置</span></b><span><span class="bilingual-en">Reports are saved in this browser and are not shared across devices.</span><span class="bilingual-zh" lang="zh-HK">報告只儲存在此瀏覽器，暫未跨裝置共享。</span></span></div>
+      </aside>
+
+      <section class="dashboard-section recent-section" aria-labelledby="recent-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="recent-heading" class="section-title"><span class="bilingual-en">Recent reports</span><span class="bilingual-zh" lang="zh-HK">最近報告</span></h2>
+            <p class="section-description"><span class="bilingual-en">Latest activity on this device</span><span class="bilingual-zh" lang="zh-HK">此裝置的最新記錄</span></p>
+          </div>
+        </div>
+        <div id="recent" class="report-list" aria-live="polite"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="Main navigation 主導覽">
+      <a class="nav-link active" href="index.html" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create" href="report.html" aria-label="Create a new report 建立新報告"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link" href="issues.html"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link" href="history.html"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script>
+    const isChinese = OPS.getLanguage() === 'zh';
+    const records = OPS.get();
+    const openRecords = records.filter(record => (record.workflowStatus || 'Reported') !== 'Completed');
+    openCount.textContent = openRecords.length;
+    suspendedCount.textContent = openRecords.filter(record => record.statusEn === 'Operation Suspended').length;
+
+    const recentRecords = records.slice(0, 3);
+    if (recentRecords.length) {
+      recent.innerHTML = recentRecords.map(record => `<article class="report-item ${OPS.statusClass(record.statusEn)}"><div class="report-main"><span class="report-primary">${record.plant || '—'} · ${record.material || '—'} · ${isChinese ? record.issueZh || '問題未提供' : record.issueEn || 'Issue details unavailable'}</span><span class="report-secondary">${isChinese ? record.workflowStatusZh || '已報告' : record.workflowStatus || 'Reported'}</span><span class="report-meta">${OPS.fmt(record.incident) || '—'} · ${isChinese ? record.statusZh || '運作情況未提供' : record.statusEn || 'Operating status unavailable'}</span></div><a class="pencil-button" href="edit.html?ticket=${encodeURIComponent(record.ticket || '')}" aria-label="${isChinese ? '編輯報告' : 'Edit report'}"><span aria-hidden="true">&#9998;</span></a></article>`).join('');
+    } else {
+      recent.innerHTML = '<div class="dashboard-empty"><span class="empty-icon" aria-hidden="true">✓</span><h3><span class="bilingual-en">No reports yet</span><span class="bilingual-zh" lang="zh-HK">暫無報告</span></h3><p><span class="bilingual-en">When a report is submitted, it will appear here.</span><span class="bilingual-zh" lang="zh-HK">提交報告後，記錄會顯示在這裡。</span></p><a class="empty-action bilingual-control" href="report.html"><span class="bilingual-en">Create a report</span><span class="bilingual-zh" lang="zh-HK">建立報告</span></a></div>';
+    }
+  </script>
+</body>
+</html>

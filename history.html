@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Issue History v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header"><span class="version">v0.8.11</span><strong class="bilingual-en">Operations Support</strong><small class="bilingual-zh" lang="zh-HK">前線故障報告</small></header>
+    <main id="main" class="main">
+      <h1 class="page-title"><span class="bilingual-en">Issue history</span><small class="bilingual-zh" lang="zh-HK">問題記錄</small></h1>
+      <p class="section-description"><span class="bilingual-en">Browse and update reports saved on this device.</span><span class="bilingual-zh" lang="zh-HK">查看及更新此裝置儲存的報告。</span></p>
+
+      <section class="history-controls" aria-labelledby="dateFilterHeading">
+        <h2 id="dateFilterHeading" class="section-title"><span class="bilingual-en">Incident date</span><span class="bilingual-zh" lang="zh-HK">事發日期</span></h2>
+        <div class="date-filter" role="group" data-aria-en="Incident date range" data-aria-zh="事發日期範圍" aria-label="Incident date range">
+          <button type="button" class="selected" data-period="all" data-aria-en="All dates" data-aria-zh="全部日期" title="All dates" aria-pressed="true"><span class="bilingual-en">All</span><span class="bilingual-zh" lang="zh-HK">全部</span></button>
+          <button type="button" data-period="day" data-aria-en="Today" data-aria-zh="今日" title="Today" aria-pressed="false"><span class="bilingual-en">Day</span><span class="bilingual-zh" lang="zh-HK">日</span></button>
+          <button type="button" data-period="week" data-aria-en="This week" data-aria-zh="本週" title="This week" aria-pressed="false"><span class="bilingual-en">W</span><span class="bilingual-zh" lang="zh-HK">週</span></button>
+          <button type="button" data-period="month" data-aria-en="This month" data-aria-zh="本月" title="This month" aria-pressed="false"><span class="bilingual-en">M</span><span class="bilingual-zh" lang="zh-HK">月</span></button>
+          <button type="button" data-period="custom" data-aria-en="Custom date range" data-aria-zh="自訂日期範圍" title="Custom date range" aria-pressed="false"><span class="bilingual-en">Custom</span><span class="bilingual-zh" lang="zh-HK">自訂</span></button>
+        </div>
+        <div id="customRange" class="custom-range" hidden>
+          <div class="grid2">
+            <div class="field"><label class="label" for="dateFrom"><span class="bilingual-en">From</span><span class="bilingual-zh" lang="zh-HK">開始日期</span></label><input id="dateFrom" type="date"></div>
+            <div class="field"><label class="label" for="dateTo"><span class="bilingual-en">To</span><span class="bilingual-zh" lang="zh-HK">結束日期</span></label><input id="dateTo" type="date"></div>
+          </div>
+          <button id="applyRange" class="action primary bilingual-control" type="button"><span class="bilingual-en">Apply dates</span><span class="bilingual-zh" lang="zh-HK">套用日期</span></button>
+        </div>
+        <p id="dateMessage" class="filter-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="history-controls status-controls" aria-labelledby="statusFilterHeading">
+        <h2 id="statusFilterHeading" class="section-title"><span class="bilingual-en">Issue status</span><span class="bilingual-zh" lang="zh-HK">問題狀態</span></h2>
+        <div class="history-filter" role="group" data-aria-en="Filter by issue status" data-aria-zh="按問題狀態篩選" aria-label="Filter by issue status">
+          <button type="button" class="selected" data-filter="all" aria-pressed="true"><span class="bilingual-en">All</span><span class="bilingual-zh" lang="zh-HK">全部</span></button>
+          <button type="button" data-filter="open" aria-pressed="false"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></button>
+          <button type="button" data-filter="completed" aria-pressed="false"><span class="bilingual-en">Completed</span><span class="bilingual-zh" lang="zh-HK">已完成</span></button>
+        </div>
+      </section>
+      <div id="historyList" class="report-list" aria-live="polite"></div>
+    </main>
+    <nav class="bottom-nav" aria-label="Main navigation 主導覽">
+      <a class="nav-link" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create" href="report.html" aria-label="Create a new report 建立新報告"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link" href="issues.html"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link active" href="history.html" aria-current="page"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script>
+    let statusFilter = 'all';
+    let period = 'all';
+    let dateRange = null;
+    const records = OPS.get();
+    const periodButtons = [...document.querySelectorAll('.date-filter button')];
+    const statusButtons = [...document.querySelectorAll('.history-filter button')];
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+    const toDateString = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    const shiftDate = (date, days) => {
+      const shifted = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      shifted.setDate(shifted.getDate() + days);
+      return shifted;
+    };
+
+    function setPeriodRange(selectedPeriod) {
+      const today = new Date();
+      const todayString = toDateString(today);
+      if (selectedPeriod === 'day') dateRange = { from: todayString, to: todayString };
+      else if (selectedPeriod === 'week') {
+        const monday = shiftDate(today, -((today.getDay() + 6) % 7));
+        dateRange = { from: toDateString(monday), to: toDateString(shiftDate(monday, 6)) };
+      } else if (selectedPeriod === 'month') {
+        dateRange = {
+          from: toDateString(new Date(today.getFullYear(), today.getMonth(), 1)),
+          to: toDateString(new Date(today.getFullYear(), today.getMonth() + 1, 0))
+        };
+      } else {
+        dateRange = null;
+      }
+    }
+
+    function incidentDate(record) {
+      if (typeof record.incident === 'string') {
+        const isoDate = record.incident.match(/^(\d{4}-\d{2}-\d{2})(?:T|$)/);
+        if (isoDate) return isoDate[1];
+        const parsed = new Date(record.incident);
+        if (!Number.isNaN(parsed.getTime())) return toDateString(parsed);
+      }
+      return '';
+    }
+
+    function render() {
+      let filtered = records;
+      if (statusFilter === 'open') filtered = filtered.filter(record => (record.workflowStatus || 'Reported') !== 'Completed');
+      if (statusFilter === 'completed') filtered = filtered.filter(record => record.workflowStatus === 'Completed');
+      if (dateRange) filtered = filtered.filter(record => {
+        const date = incidentDate(record);
+        return date && date >= dateRange.from && date <= dateRange.to;
+      });
+
+      dateMessage.textContent = dateRange ? `${dateRange.from} – ${dateRange.to}` : '';
+
+      if (filtered.length) {
+        const isChinese = OPS.getLanguage() === 'zh';
+        historyList.innerHTML = filtered.map(record => `<article class="report-item ${OPS.statusClass(record.statusEn)}"><div class="report-main"><span class="report-primary">${escapeHtml(record.plant || '—')} · ${escapeHtml(record.material || '—')} · ${escapeHtml(isChinese ? record.issueZh || '問題未提供' : record.issueEn || 'Issue details unavailable')}</span><span class="report-secondary">${escapeHtml(isChinese ? record.workflowStatusZh || '已報告' : record.workflowStatus || 'Reported')}</span><span class="report-meta">${escapeHtml(OPS.fmt(record.incident) || '—')} · ${escapeHtml(isChinese ? record.statusZh || '運作情況未提供' : record.statusEn || 'Operating status unavailable')}</span></div><a class="pencil-button" href="edit.html?ticket=${encodeURIComponent(record.ticket || '')}" aria-label="${isChinese ? '編輯報告' : 'Edit report'}"><span aria-hidden="true">&#9998;</span></a></article>`).join('');
+      } else {
+        historyList.innerHTML = `<div class="dashboard-empty" role="status"><span class="empty-icon" aria-hidden="true">✓</span><h2>${OPS.getLanguage() === 'zh' ? '沒有符合的報告' : 'No matching reports'}</h2><p>${OPS.getLanguage() === 'zh' ? '請嘗試其他日期範圍或狀態。' : 'Try another date range or status.'}</p></div>`;
+      }
+    }
+
+    periodButtons.forEach(button => button.onclick = () => {
+      period = button.dataset.period;
+      periodButtons.forEach(option => {
+        const selected = option === button;
+        option.classList.toggle('selected', selected);
+        option.setAttribute('aria-pressed', String(selected));
+      });
+      customRange.hidden = period !== 'custom';
+      setPeriodRange(period);
+      render();
+    });
+
+    statusButtons.forEach(button => button.onclick = () => {
+      statusFilter = button.dataset.filter;
+      statusButtons.forEach(option => {
+        const selected = option === button;
+        option.classList.toggle('selected', selected);
+        option.setAttribute('aria-pressed', String(selected));
+      });
+      render();
+    });
+
+    applyRange.onclick = () => {
+      if (!dateFrom.value || !dateTo.value) {
+        dateMessage.textContent = OPS.getLanguage() === 'zh' ? '請選擇開始及結束日期。' : 'Select both a start and end date.';
+        (dateFrom.value ? dateTo : dateFrom).focus();
+        return;
+      }
+      if (dateFrom.value > dateTo.value) {
+        dateMessage.textContent = OPS.getLanguage() === 'zh' ? '開始日期不可遲於結束日期。' : 'The start date must be on or before the end date.';
+        dateFrom.focus();
+        return;
+      }
+      dateRange = { from: dateFrom.value, to: dateTo.value };
+      render();
+    };
+
+    render();
+  </script>
+</body>
+</html>

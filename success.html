@@ -1,1 +1,104 @@
-<!doctype html><html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Report Submitted v0.8.02</title><link rel="stylesheet" href="styles.css"></head><body><div class="app"><header class="header"><span class="version">v0.8.02</span><strong>Operations Support</strong><small>前線故障報告</small></header><main class="main success"><div class="check">✓</div><h1>Report Submitted</h1><p>報告已成功提交，並儲存在此裝置。</p><div id="reference" class="reference"></div><div class="field"><label class="label">Message Language 訊息語言</label><div class="language-grid"><button class="language selected" data-lang="zh">中文</button><button class="language" data-lang="en">English</button></div><textarea id="message" class="message" readonly></textarea><div class="actions"><button id="copy" class="action primary">複製中文訊息</button><button id="whatsapp" class="action whatsapp">開啟 WhatsApp</button></div></div><a class="single-action" href="index.html">Back to Home 返回主頁</a></main></div><script src="config.js"></script><script src="app.js"></script><script>let lang='zh',ticket=new URLSearchParams(location.search).get('ticket'),x=OPS.get().find(y=>y.ticket===ticket);reference.textContent='Reference Number 參考編號：'+(ticket||'');function render(){if(!x)return;const a=lang==='zh'?[`廠房：${x.plant}`,`物料：${x.material}`,`事發時間：${OPS.fmt(x.incident)}`,`問題類別：${x.typeZh}`,`相關問題：${x.issueZh}`,`運作情況：${x.statusZh}`]:[`Plant: ${x.plant}`,`Material: ${x.material}`,`Incident Time: ${OPS.fmt(x.incident)}`,`Issue Type: ${x.typeEn}`,`Issue: ${x.issueEn}`,`Operating Status: ${x.statusEn}`];if(x.remark)a.push((lang==='zh'?'情況說明：':'Remark: ')+x.remark);message.value=a.join('\n');copy.textContent=lang==='zh'?'複製中文訊息':'Copy English Message'}document.querySelectorAll('.language').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;document.querySelectorAll('.language').forEach(y=>y.classList.toggle('selected',y===b));render()});copy.onclick=()=>navigator.clipboard.writeText(message.value);whatsapp.onclick=()=>open('https://wa.me/?text='+encodeURIComponent(message.value),'_blank');render();</script></body></html>
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176bd8">
+  <title>Report Submitted v0.8.11</title>
+  <link rel="stylesheet" href="styles.css?v=0.8.11">
+</head>
+<body>
+  <a class="skip-link" href="#main"><span class="bilingual-en">Skip to content</span><span class="bilingual-zh" lang="zh-HK">跳至主內容</span></a>
+  <div class="app">
+    <header class="header"><span class="version">v0.8.11</span><strong class="bilingual-en">Operations Support</strong><small class="bilingual-zh" lang="zh-HK">前線故障報告</small></header>
+    <main id="main" class="main success">
+      <div class="check" aria-hidden="true">✓</div>
+      <h1><span class="bilingual-en">Report submitted</span><span class="bilingual-zh" lang="zh-HK">報告已提交</span></h1>
+      <p id="successMessage"></p>
+      <div id="reference" class="reference"></div>
+      <div class="field">
+        <div id="languageLabel" class="label"><span class="bilingual-en">Message language</span><span class="bilingual-zh" lang="zh-HK">訊息語言</span></div>
+        <div class="language-grid" role="group" aria-labelledby="languageLabel">
+          <button type="button" class="language selected" data-lang="zh" aria-pressed="true" lang="zh-HK">中文</button>
+          <button type="button" class="language" data-lang="en" aria-pressed="false" lang="en">English</button>
+        </div>
+        <label class="sr-only" for="message"><span class="bilingual-en">Report message</span><span class="bilingual-zh" lang="zh-HK">報告訊息</span></label>
+        <textarea id="message" class="message" readonly></textarea>
+        <div class="actions">
+          <button id="copy" class="action primary bilingual-control" type="button"><span class="bilingual-en">Copy message</span><span class="bilingual-zh" lang="zh-HK">複製訊息</span></button>
+          <button id="whatsapp" class="action whatsapp bilingual-control" type="button"><span class="bilingual-en">Open WhatsApp</span><span class="bilingual-zh" lang="zh-HK">開啟 WhatsApp</span></button>
+        </div>
+        <p id="actionStatus" class="action-status" role="status" aria-live="polite"></p>
+      </div>
+      <a class="single-action bilingual-control" href="index.html"><span class="bilingual-en">Back to home</span><span class="bilingual-zh" lang="zh-HK">返回主頁</span></a>
+    </main>
+    <nav class="bottom-nav" aria-label="Main navigation 主導覽">
+      <a class="nav-link" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label"><span class="bilingual-en">Home</span><span class="bilingual-zh" lang="zh-HK">主頁</span></span></a>
+      <a class="nav-link nav-create" href="report.html" aria-label="Create a new report 建立新報告"><span class="nav-icon" aria-hidden="true">+</span><span class="nav-label"><span class="bilingual-en">New</span><span class="bilingual-zh" lang="zh-HK">新增</span></span></a>
+      <a class="nav-link" href="issues.html"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label"><span class="bilingual-en">Open</span><span class="bilingual-zh" lang="zh-HK">未完成</span></span></a>
+      <a class="nav-link" href="history.html"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-label"><span class="bilingual-en">History</span><span class="bilingual-zh" lang="zh-HK">記錄</span></span></a>
+    </nav>
+  </div>
+  <script src="config.js?v=0.8.11"></script>
+  <script src="app.js?v=0.8.11"></script>
+  <script>
+    let lang = OPS.getLanguage();
+    const uiLanguage = OPS.getLanguage();
+    const ticket = new URLSearchParams(location.search).get('ticket');
+    const record = OPS.get().find(item => item.ticket === ticket);
+    const languageButtons = [...document.querySelectorAll('.language')];
+    reference.textContent = `${uiLanguage === 'zh' ? '參考編號' : 'Reference number'}: ${ticket || '—'}`;
+    successMessage.textContent = uiLanguage === 'zh' ? '報告已成功提交，並儲存在此裝置。' : 'Your report was submitted and saved on this device.';
+    languageButtons.forEach(button => {
+      button.classList.toggle('selected', button.dataset.lang === lang);
+      button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
+    });
+    if (!record) {
+      document.title = uiLanguage === 'zh' ? '報告詳情未能顯示' : 'Report details unavailable';
+      document.querySelector('.success h1').textContent = uiLanguage === 'zh' ? '報告詳情未能顯示' : 'Report details unavailable';
+      successMessage.textContent = uiLanguage === 'zh' ? '此裝置找不到該報告。' : 'This report could not be found on this device.';
+      message.value = '';
+      copy.disabled = whatsapp.disabled = true;
+    }
+
+    function render() {
+      if (!record) return;
+      const lines = lang === 'zh'
+        ? [`廠房：${record.plant}`, `物料：${record.material}`, `事發時間：${OPS.fmt(record.incident)}`, `問題類別：${record.typeZh}`, `相關問題：${record.issueZh}`, `運作情況：${record.statusZh}`]
+        : [`Plant: ${record.plant}`, `Material: ${record.material}`, `Incident time: ${OPS.fmt(record.incident)}`, `Issue type: ${record.typeEn}`, `Issue: ${record.issueEn}`, `Operating status: ${record.statusEn}`];
+      if (record.remark) lines.push(`${lang === 'zh' ? '情況說明' : 'Remark'}: ${record.remark}`);
+      message.value = lines.join('\n');
+      copy.textContent = uiLanguage === 'zh' ? '複製訊息' : 'Copy message';
+      whatsapp.textContent = uiLanguage === 'zh' ? '開啟 WhatsApp' : 'Open WhatsApp';
+      actionStatus.textContent = '';
+    }
+
+    languageButtons.forEach(button => button.onclick = () => {
+      lang = button.dataset.lang;
+      languageButtons.forEach(option => {
+        const selected = option === button;
+        option.classList.toggle('selected', selected);
+        option.setAttribute('aria-pressed', String(selected));
+      });
+      render();
+    });
+
+    copy.onclick = async () => {
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable');
+        await navigator.clipboard.writeText(message.value);
+        actionStatus.textContent = uiLanguage === 'zh' ? '已複製訊息。' : 'Message copied.';
+      } catch {
+        message.focus();
+        message.select();
+        actionStatus.textContent = uiLanguage === 'zh'
+          ? '無法自動複製。訊息已選取，請手動複製。'
+          : 'Automatic copy failed. The message is selected; copy it manually.';
+      }
+    };
+
+    whatsapp.onclick = () => window.open(`https://wa.me/?text=${encodeURIComponent(message.value)}`, '_blank', 'noopener');
+    render();
+  </script>
+</body>
+</html>
